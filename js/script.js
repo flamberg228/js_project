@@ -1,7 +1,7 @@
 let money, income, addExpenses, deposit, mission, period, budgetDay;
 money = 10000; // доход за месяц 
 income = 'фриланс';
-addExpenses = 'интернет, комуналка, телефон';
+addExpenses = 'Интернет, комуналка, телефон';
 deposit = true;
 mission = 20000; // цель
 period = 2; // время достижения цели
@@ -13,4 +13,6 @@ console.log(typeof(deposit));
 console.log(addExpenses.length);
 console.log('Период равен ' + period + ' ' + 'месяцам');
 console.log('Цель заработать ' + mission + ' ' + 'гривен');
+console.log(addExpenses.toLowerCase());
+console.log(addExpenses.split(' '));
 console.log('Дневной доход равен = ' + Math.trunc(budgetDay) + ' ' + 'гривны');
