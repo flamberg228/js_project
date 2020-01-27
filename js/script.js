@@ -23,6 +23,7 @@ money = +prompt('Ваш месячный доход?');
 
 addExpenses = String(prompt('Перечислите выши расходы через запятую'));
 deposit = confirm('Есть ли у вас депозит?');
+console.log(deposit);
 // let t, f;
 // f = 'нет';
 // t = 'да';
