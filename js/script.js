@@ -22,18 +22,18 @@ console.log('Дневной доход равен = ' + Math.trunc(budgetDay) + 
 money = +prompt('Ваш месячный доход?');
 
 addExpenses = String(prompt('Перечислите выши расходы через запятую'));
-deposit = prompt('Есть ли у вас депозит?').toLowerCase();
-let t, f;
-f = 'нет';
-t = 'да';
+deposit = confirm('Есть ли у вас депозит?');
+// let t, f;
+// f = 'нет';
+// t = 'да';
 
-if (deposit === t) {
-  deposit=true;
-  console.log(deposit);
-} else if (deposit === f) {
-  deposit=false;
-  console.log(deposit);
-}
+// if (deposit === t) {
+//   deposit=true;
+//   console.log(deposit);
+// } else if (deposit === f) {
+//   deposit=false;
+//   console.log(deposit);
+// }
 
 let expenses1 = String(prompt('Введите обязательную статью расходов?'));
 let amount1 = +prompt('Во сколько это обойдется?');
