@@ -1,5 +1,5 @@
 let string = prompt('Введите строку или число: ');
-string = Number(string)
+// string = Number(string)
 let deleteSpaces = function (str) {
   if (typeof(str) === 'number') {
     console.log('Данные не являются строкой');
