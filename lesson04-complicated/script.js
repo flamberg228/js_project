@@ -4,7 +4,7 @@ let deleteSpaces = function (str) {
   if (typeof(str) === 'number') {
     return ('Данные не являются строкой');
     // str = parseInt(str)
-  } else if (str === 'undefined') {
+  } else if (str === null) {
     return ('Данные не введены')
   }
   str = String(str);
