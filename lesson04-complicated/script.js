@@ -1,13 +1,15 @@
 let string = prompt('Введите строку или число: ');
-// string = Number(string)
+
 let deleteSpaces = function (str) {
-  if (typeof(str) === Number) {
-    console.log('Данные не являются строкой');
+  if (typeof(str) === 'number') {
+    return ('Данные не являются строкой');
     // str = parseInt(str)
+  } else if (str === 'undefined') {
+    return ('Данные не введены')
   }
   str = String(str);
   str = str.trim();
-  str2 = String(str);
+  str2 = str;
   if (str.length>30) {
     str2 = str.slice(0, 30);
     str2 += '...';
