@@ -1,14 +1,15 @@
 'use strict';
 
-function check() {
-  let num = 1;
-  function number () {
-    num = Math.floor(Math.random() * Math.floor(100)) + 1;
-    return num;
-  }
-  console.log(number())
-
+function game () {
+  // function number() {
   
+  //   return num;
+  // // }
+  // let clc = number();
+  let num = Math.floor(Math.random() * Math.floor(100)) + 1;
+  console.log(num);
+  function check () {
+ 
   let ask = prompt('Угадай число от 1 до 100 ');
   console.log(ask)
   // let counter = 1; 
@@ -20,22 +21,24 @@ function check() {
   } else if(ask === null) {
     alert('Игра закончена')
   } 
-  else if(ask<number()) {
-    alert('Заданное число меньше')
+  else if(ask<num) {
+    alert('Загаданное число больше')
     check();
-  } else if(ask>number()) {
-    alert('Заданное число больше')
+  } else if(ask>num) {
+    alert('Загаданное число меньше')
     check();
-  } else if (ask == number()) {
-    let y = confirm('Вы угадали. Хотите сыграть еще раз? ');
-    if(y===true) {
-      check();
-    }
+  } else if (ask == num) {
+    let yes = alert('Вы угадали ');
+    return;
+    // if(yes === true) {
+    //   check();
+    // }
    
   }
-
+}
+check();
 
 }
 
-check()
+game()
 
