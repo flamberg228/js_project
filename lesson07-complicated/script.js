@@ -5,7 +5,7 @@ let day = now.getDay();
  
 
 if(day === 0) {
-  day = day + 6;
+  day = 6;
 }
 else if(day > 0) {
   day = day - 1;
