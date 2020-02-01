@@ -12,6 +12,7 @@ let appData = {
   budget: 0,
   budgetMonth: 0,
   budgetDay: 0,
+  expensesMonth: 0,
   // budget:  function () {
                
   //               console.log(appData.budgetDay)
@@ -30,6 +31,7 @@ let appData = {
                     for(let key in appData.expenses) {
                       sum += appData.expenses[key];
                     }
+                    appData.expensesMonth = sum;
                     return sum;
                   },
   // accumulatedMonth: 0,
