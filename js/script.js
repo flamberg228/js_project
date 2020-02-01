@@ -99,6 +99,3 @@ for(let key in objects) {
   console.log('Свойство ' + key + ' значение ' + objects[key])
 }
 }
-// for(let key in appData) {
-//   console.log('Свойство ' + key + ' значение ' + appData[key])
-// }
