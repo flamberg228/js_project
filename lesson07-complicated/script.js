@@ -1,9 +1,9 @@
 let myMas = ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'.italics(), 'Воскресенье'.italics()];
-console.log(myMas[0])
+
 let now = new Date()
 let day = now.getDay();
-console.log(now.getDay())  
-day = 6;
+ 
+
 if(day === 0) {
   day = day + 6;
 }
