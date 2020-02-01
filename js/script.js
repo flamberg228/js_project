@@ -9,16 +9,23 @@ let appData = {
   deposit: true,
   mission: 20000, // цель
   // period: 2, // время достижения цели 
-  budget: money,
-  budgetDay:  function () {
-                let day = Math.floor(appData.budgetMonth()/30);
-                return day;
-              },
-  budgetMonth:  function () {
-                  let diff = (+money - +appData.expensesMonth());
+  budget: 0,
+  budgetMonth: 0,
+  budgetDay: 0,
+  // budget:  function () {
+               
+  //               console.log(appData.budgetDay)
+  //               return day;
+  //             },
+  getBudget:  function () {
+                  let diff = (+money - +appData.getExpensesMonth());
+                  appData.budgetMonth = diff;
+                  // console.log(appData.budgetMonth)
+                  let day = Math.floor(appData.budgetMonth/30);
+                  appData.budgetDay = day;
                   return diff;
                 },
-  expensesMonth:  function () {
+  getExpensesMonth:  function () {
                     let sum = 0;
                     for(let key in appData.expenses) {
                       sum += appData.expenses[key];
@@ -26,20 +33,20 @@ let appData = {
                     return sum;
                   },
   // accumulatedMonth: 0,
-  targetMonth:  function () {
-                  let duration = appData.mission/appData.budgetMonth();
+  getTargetMonth:  function () {
+                  let duration = appData.mission/appData.getBudget();
                   return duration.toFixed(1);
                 },
-  statusIncome: function() {
-                  if (appData.budgetDay() >= 1200) {
+  getStatusIncome: function() {
+                  if (appData.budgetDay >= 1200) {
                     return ('У вас высокий уровень дохода');
-                  } else if (appData.budgetDay() < 1200 && appData.budgetDay() >= 600) {
+                  } else if (appData.budgetDay < 1200 && appData.budgetDay >= 600) {
                     return ('У вас средний уровень дохода');
-                  } else if (appData.budgetDay() < 600 && appData.budgetDay() > 0) {
+                  } else if (appData.budgetDay < 600 && appData.budgetDay > 0) {
                     return ('К сожалению у вас уровень дохода ниже среднего');
-                  } else if (appData.budgetDay() === 0) {
+                  } else if (appData.budgetDay === 0) {
                     return ('Ваш доход равен 0. Поздравляю, вы безработный!');
-                  } else if (appData.budgetDay() < 0) {
+                  } else if (appData.budgetDay < 0) {
                     return ('Вы ввели отрицательное значение');
                   } else {
                     return ('Вы ввели некорректное значение');
@@ -65,9 +72,6 @@ let appData = {
         while(isNaN(parseFloat(amount)) && amount !== null);
         amount = Number(amount);
         appData.expenses[expens] = amount;
-
-        let sum = 0;
-        sum = sum + amount; 
         }
         // console.log(appData.expenses)
     }
@@ -80,22 +84,25 @@ let start = function () {
     money = prompt('Ваш месячный доход?', '20000').trim();
   }
   while (isNaN(parseFloat(money)));
+  appData.budget = money;
   // console.log(typeof(money))
 }
 start();
 appData.asking();
+
 // console.log(appData.budget)
-console.log('Сумма обязательных расходов за месяц равна : ' + appData.expensesMonth());
+console.log('Сумма обязательных расходов за месяц равна : ' + appData.getExpensesMonth());
 
-// let accumulatedMonth = getAccumulatedMonth();
+// let accumulatedMonth = getBudget();
 
-if (appData.targetMonth() > 0 ) console.log('Цель будет достигнута за ' + appData.targetMonth() + ' месяцев');
-else if (appData.targetMonth() <=0 ) console.log('Цель не будет достигнута');
+if (appData.getTargetMonth() > 0 ) console.log('Цель будет достигнута за ' + appData.getTargetMonth() + ' месяцев');
+else console.log('Цель не будет достигнута');
 
-console.log(appData.statusIncome());
+console.log(appData.getStatusIncome());
 console.log('Наша команда включает в себя данные: ')
 let output = function (objects) {
 for(let key in objects) {
   console.log('Свойство ' + key + ' значение ' + objects[key])
 }
 }
+output(appData)
