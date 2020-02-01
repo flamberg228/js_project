@@ -14,24 +14,29 @@ function game () {
   restart();
   
   function check () {
-  counter = counter - 1;
-  let ask = prompt('Угадай число от 1 до 100 ');
+  
+  let ask = prompt('Угадай число от 1 до 100 ').trim();
+ 
   console.log(ask)
   // let counter = 1; 
-  
+  // counter = counter - 1;
   // console.log(counter)
   if(isNaN(ask)  || ask === '') {
     alert('Введите число' );
     check();
-  } else if(ask === null) {
+  } 
+  else if(ask === null) {
     alert('Игра закончена. Прощайте')
   } 
-  else if(ask<num && counter>0) {
-    
+  else if(ask<num && counter>1) {
+    counter = counter - 1;
     alert('Загаданное число больше. Осталось попыток: ' + counter)
+    
     check();
-  } else if(ask>num && counter>0) {
+  } else if(ask>num && counter>1) {
+    counter = counter - 1;
     alert('Загаданное число меньше. Осталось попыток: ' + counter)
+    
     check();
   } else if (ask == num) {
     let yes = confirm('Вы угадали. Хотите сыграть еще раз? ');
@@ -45,7 +50,7 @@ function game () {
     // if(yes === true) {
     //   check();  // }  
   }
-  else if (counter === 0) {
+  else if (counter === 1) {
     let y = confirm('Попытки закончились. Игра окончена. Хотите сыграть еще раз')
     if (y === true) {
       counter = 10;
