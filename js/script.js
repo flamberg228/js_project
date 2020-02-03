@@ -75,17 +75,16 @@ let appData = {
       }    
 
       let addExpenses = String(prompt('Перечислите выши расходы через запятую', 'Телефон, дом, комуналка'));
-      addExpenses = String(addExpenses);
       addExpenses = addExpenses.split(', ');
-      // appData.upper = function () {
       let distance = addExpenses.length
       let mas = [distance];
+
       for(let i = 0;i<addExpenses.length; i++) {   
-        // console.log(addExpenses[i][0].toUpperCase())  
        mas[i] = addExpenses[i][0].toUpperCase() + addExpenses[i].slice(1);   
       }
+      
       console.log(mas.join(', '))
-      // console.log(mas) 
+
       appData.deposit = confirm('Есть ли у вас депозит?');
 
       for(let i=0; i<2; i++) {
