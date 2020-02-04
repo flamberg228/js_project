@@ -81,5 +81,5 @@ else if(day > 0) {
 }
 
 
-document.write(dayMas[day] + ' ' + monthDay2 + ' ' + monthMas[month2] + ' ' + hour2 + ' ' + hoursFunction() + ' ' + minuts2 + ' ' + minutsFunction() + ' ' + seconds2 + ' ' + secondsFunction());
-
+document.write(dayMas[day] + ' ' + monthDay2 + ' ' + monthMas[month2] + ' ' + year2 + ' года' + ' ' + hour2 + ' ' + hoursFunction() + ' ' + minuts2 + ' ' + minutsFunction() + ' ' + seconds2 + ' ' + secondsFunction());
+// document.write(monthDay2 + month2  )
