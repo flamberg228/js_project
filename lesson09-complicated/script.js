@@ -3,20 +3,20 @@ let monthMas = ['Января', 'Февраля', 'Марта', 'Апреля', 
 
 let day = new Date().getDay();
 
-
 let monthDay = new Date().getDate();
 
 let month = new Date().getMonth();
 
-
 let year = new Date().getFullYear();
-// let yearWord = 'год';
-// if(year.slice(-1) > 5) {
-//   console.log('год')
-// }
-
 
 let hour = new Date().getHours();
+// let hour3;
+// let hours = setTimeout(function () {
+//   seconds = new Date().getSeconds();
+//   return seconds;
+// }, 1000);
+// console.log(hours);
+// document.write(hours);
 let hourWord;
 
 function hoursFunction () {
@@ -32,7 +32,7 @@ function hoursFunction () {
     return hourWord;
   }
 }
-console.log(hoursFunction())
+console.log(hoursFunction());
 
 
 let minuts = new Date().getMinutes();
@@ -51,7 +51,7 @@ function minutsFunction () {
     return minutsWord;
   }
 }
-console.log(minutsFunction())
+console.log(minutsFunction());
 
 
 let seconds = new Date().getSeconds();
@@ -70,7 +70,7 @@ function secondsFunction () {
     return secondsWord;
   }
 }
-console.log(secondsFunction())
+console.log(secondsFunction());
 
 if(day === 0) {
   day = 6;
@@ -95,5 +95,5 @@ function addZero (num) {
 }
 
 document.write(addZero(monthDay) + '.' + addZero(month) + '.' + year + ' - ' + addZero(hour) + ':' + addZero(minuts) + ':' + addZero(seconds));
-console.log(month)
-console.log(addZero(minuts))
+console.log(month);
+console.log(addZero(minuts));
