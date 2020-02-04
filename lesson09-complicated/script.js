@@ -80,6 +80,20 @@ else if(day > 0) {
 }
 
 
+
 document.write(dayMas[day] + ' ' + monthDay + ' ' + monthMas[month] + ' ' + year + ' года' + ' ' + hour + ' ' + hoursFunction() + ' ' + minuts + ' ' + minutsFunction() + ' ' + seconds + ' ' + secondsFunction() + '<br>');
-document.write(monthDay + month);
+
+function addZero (num) {
+  if(num > 0 && num < 10) {
+    String(num);
+    let zero = '0';
+    zero += num;
+    num = zero;
+    return num;
+  }
+  return num;
+}
+
+document.write(addZero(monthDay) + '.' + addZero(month) + '.' + year + ' - ' + addZero(hour) + ':' + addZero(minuts) + ':' + addZero(seconds));
 console.log(month)
+console.log(addZero(minuts))
