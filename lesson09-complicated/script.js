@@ -11,12 +11,12 @@ let year = new Date().getFullYear();
 
 let hour = new Date().getHours();
 // let hour3;
-let hours = setTimeout(function () {
-  seconds = new Date().getSeconds();
-  return seconds;
-}, 1000);
-// console.log(hours);
-document.write(hours);
+// let hours = setTimeout(function () {
+//   seconds = new Date().getSeconds();
+//   return seconds;
+// }, 1000);
+// // console.log(hours);
+// document.write(hours);
 let hourWord;
 
 function hoursFunction () {
@@ -56,11 +56,11 @@ console.log(minutsFunction());
 
 let seconds = new Date().getSeconds();
 let secondWord;
-let second = setInterval(function () {
-  let scn = new Date().getSeconds();
-  return scn;
-}, 1000);
-document.write(second)
+// let second = setInterval(function () {
+//   let scn = new Date().getSeconds();
+//   return scn;
+// }, 1000);
+// document.write(second)
 function secondsFunction () {
   seconds = String(seconds);
   if(seconds.slice(-1) >= 5 || seconds >= 11 && seconds <=15 || seconds == 0 || seconds.slice(-1) == 0) {
@@ -97,10 +97,21 @@ function addZero (num) {
   }
   return num;
 }
-
-// setInterval(function bro() {
-  document.write(addZero(monthDay) + '.' + addZero(month) + '.' + year + ' - ' + addZero(hour) + ':' + addZero(minuts)  + ':' + addZero(second) + '<br>');
-  // }, 1000);
-bro();
-console.log(month);
-console.log(addZero(minuts));
+function time(){
+  var date = new Date(),
+  hours = date.getHours();
+  if(date.getHours() < 10) {
+    seconds = '0' + date.getHours();
+  }
+  minutes = date.getMinutes();
+  if(date.getMinutes() < 10) {
+    seconds = '0' + date.getMinutes();
+  }
+  seconds = date.getSeconds();
+  if(date.getSeconds() < 10) {
+    seconds = '0' + date.getSeconds();
+  }
+ 
+  document.write(hours + ':' + minutes + ':' + seconds + '<br>');
+ }
+ setInterval(time, 1000);
