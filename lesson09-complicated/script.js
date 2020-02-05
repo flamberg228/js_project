@@ -98,7 +98,7 @@ function addZero (num) {
   return num;
 }
 function time(){
-  var date = new Date(),
+  let date = new Date(),
   hours = date.getHours();
   if(date.getHours() < 10) {
     seconds = '0' + date.getHours();
