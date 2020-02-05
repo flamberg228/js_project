@@ -22,11 +22,13 @@ let ul = document.querySelectorAll('ul');
 let li = document.querySelectorAll('li');
 ul[1].insertBefore(li[10], li[15]);
 ul[1].insertBefore(li[11], li[15]);
-
+ul[1].insertBefore(li[8], li[16]);
+ul[1].insertBefore(li[13], li[15]);
 ul[4].insertBefore(li[38], li[42]);
-
 ul[4].insertBefore(li[45], li[39]);
+ul[4].insertBefore(li[41], li[44]);
 
 let clone = li[56].cloneNode(true);
-clone.innerHTML = ' “Глава 8: За пределами ES6”';
+clone.innerHTML = 'Глава 8: За пределами ES6';
 ul[5].insertBefore(clone, li[56]);
+
