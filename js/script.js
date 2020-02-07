@@ -95,7 +95,7 @@ let appData = {
 
   //     };     
   // },
-  start: function () {
+  start: function start () {
     this.getBlocked();
     console.log(this);
     this.budget = salaryAmount.value;
@@ -111,10 +111,11 @@ let appData = {
     // inputs[0].disabled;
     
     this.showResult();
+    console.log(this.showResult());
     
   },
   showResult: function () {
-    appData.showResult.bind(appData);
+    // appData.showResult.bind(appData);
     // console.log(this)
     budgetMonth.value = appData.budgetMonth;
     budgetDay.value = appData.budgetDay;
@@ -265,6 +266,7 @@ start.addEventListener('click', function (event) {
   if (salaryAmount.value === '') {
     return;
   } else {
+    // appData.start();
     appData.start();
   }
   // console.log(this);
@@ -272,7 +274,7 @@ start.addEventListener('click', function (event) {
 
 // appData.getAddExpenses.bind(appData);
 // appData.getAddIncome.bind(appData);
-appData.start.bind(appData);
+// appData.start.bind(appData);
 cancel.addEventListener('click', appData.getReset)
 // console.log(this.cancel);
 expensesPlus.addEventListener('click', appData.addExpensesBlock);
