@@ -328,18 +328,37 @@ let appData = {
       let expenses = document.querySelector('.expenses');
       expenses.removeChild(expensesItems[i]);
     }
-    // console.log(document.querySelector('.deposit-check').checked);
+    expensesItems = document.querySelectorAll('.expenses-items');
     console.log(checkbox.checked);
     checkbox.checked = false;
-    if(incomeItems.length>1){
-    for(let j=0; j<incomeItems.length; j++){
-      incomeItems = document.querySelectorAll('.income-items');
+   
+    // if(incomeItems.length === 2){
+    for(let j=1; j<incomeItems.length; j++){
+     
       // expensesItems[i+1].setAttribute('style', 'display: none');
-      let incomes = document.querySelector('.income');
+      let incomes;
+      incomes = document.querySelector('.income');
       // console.log(incomes, incomeItems)
-      incomes.removeChild(incomeItems[j]);
-    }
-  } 
+      let move3 = incomes.removeChild(incomeItems[j]);
+     
+      console.log(move3);
+    } 
+    incomeItems = document.querySelectorAll('.income-items');
+  // } 
+  // if(incomeItems.length === 3){
+  //   for(let j=1; j<incomeItems.length; j++){
+  //     // incomeItems = document.querySelectorAll('.income-items');
+  //     // expensesItems[i+1].setAttribute('style', 'display: none');
+  //     let incomes;
+  //     incomes = document.querySelector('.income');
+  //     // console.log(incomes, incomeItems)
+  //     let move3 = incomes.removeChild(incomeItems[j]);
+  //     incomeItems = document.querySelectorAll('.income-items');
+  //     console.log(move3);
+  //   } 
+  // } 
+  //   console.log();
+  // }
     
     cancel.setAttribute('style', 'display: none');
     start.setAttribute('style', 'display: block');
