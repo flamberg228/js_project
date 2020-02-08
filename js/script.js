@@ -133,12 +133,27 @@ let appData = {
   addExpensesBlock: function () {
     
     cloneExpensesItem = expensesItems[0].cloneNode(true);
+    cloneExpensesItem.children[0].value = '';
+    cloneExpensesItem.children[1].value = '';
+    cloneExpensesItem.children[0].onkeypress = function (event) {
+      cloneExpensesItem.children[0].value = cloneExpensesItem.children[0].value.replace(/[^а-яА-Я,.!?"';: ]/, '');
+    }
+    cloneExpensesItem.children[1].onkeypress = function (event) {
+      cloneExpensesItem.children[1].value = cloneExpensesItem.children[1].value.replace(/[^а-яА-Я,.!?"';: ]/, '');
+    }
     expensesItems[0].parentNode.insertBefore(cloneExpensesItem, expensesPlus);
     // let itemExpenses = item.querySelectorAll('.expenses-title').value;
-    // itemExpenses.forEach(function (item) {
-    //   itemExpenses[item] = 0;
-    // });
+    
     expensesItems = document.querySelectorAll('.expenses-items');
+    // for(let i=1;i<expensesItems.length;i++){
+    //   let item2 = document.querySelectorAll('.expenses-amount');
+    //   // console.log(item1)
+    //   item2[i].value = '';
+    // }
+    // for(let i=2;i<4;i++) {
+    //   let item1 = document.querySelectorAll('.expenses-title');
+    //   item1[i].value = '';
+    // }
     if(expensesItems.length === 3)  {
       expensesPlus.setAttribute('style', 'display: none');
     }
@@ -153,9 +168,16 @@ let appData = {
     });
   },
   addIncomeBlock: function () {
+
+    console.log(incomeItems[0]);
+
     let cloneIncome = incomeItems[0].cloneNode(true);
+    cloneIncome.children[0].value = '';
+    cloneIncome.children[1].value = '';
     incomeItems[0].parentNode.insertBefore(cloneIncome, incomePlus);
     incomeItems = document.querySelectorAll('.income-items');
+
+
     if(incomeItems.length === 3) {
       incomePlus.setAttribute('style', 'display: none;');
     }
@@ -261,28 +283,40 @@ let appData = {
 }
 }
 
-start.addEventListener('click', function (event) {
-  event.preventDefault();
-  if (salaryAmount.value === '') {
-    return;
-  } else {
-    // appData.start();
-    appData.start();
-  }
-  // console.log(this);
-});
-let str;
-let inputs = document.querySelectorAll('input');
+function checkMonth () {
+  start.disabled = !salaryAmount.value.trim();
+}
+checkMonth ()
+salaryAmount.addEventListener('input', checkMonth);
+start.addEventListener('click', appData.start.bind(appData));
+
+let inputsSum = document.querySelectorAll('input');
+let inputsName = document.querySelectorAll('input');
 // console.log(inp1.getAttribute('placeholder'));
 
-// inputs.forEach(function(item) {
-//   if(item.getAttribute('placeholder') === 'Сумма'){
-//     item.addEventListener.onkeypress = function(event) {
-//       console.log(event)
-//       // if()
-//     }
-//   }
-// })
+inputsSum.forEach(function(item) {
+  if(item.getAttribute('placeholder') === 'Сумма'){
+    item.onkeypress = function(event) {
+      // console.log(event)
+      let letter = event.key;
+      // console.log(letter)
+      // console.log(isNaN(letter))
+      if(isNaN(letter)) {
+        // letter = '0';
+        return false;
+      }
+    };
+    // console.log(item);
+  };
+})
+inputsName.forEach(function(item) {
+  if(item.getAttribute('placeholder') === 'Наименование'){
+    item.onkeypress = function(event) {
+      item.value = item.value.replace(/[^а-яА-Я,.!?"';: ]/, '');
+    };
+    // console.log(item);
+  };
+})
 
 cancel.addEventListener('click', appData.getReset)
 // console.log(this.cancel);
