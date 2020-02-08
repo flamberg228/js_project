@@ -147,9 +147,9 @@ let appData = {
     // let itemExpenses = item.querySelectorAll('.expenses-title').value;
     document.querySelectorAll('input').forEach(function(item) {
       if(item.getAttribute('placeholder') === 'Наименование'){
-        item.onkeypress = function(event) {
-          item.value = item.value.replace(/[^а-яА-Я,.!?"';: ]/, '');
-        };
+        item.addEventListener('input', function(event) {
+          item.value = item.value.replace(/[^а-яА-Я,.!?"';:]/,'').trim();
+        });
         // console.log(item);
       };
     })
@@ -160,7 +160,7 @@ let appData = {
           let letter = event.key;
           // console.log(letter)
           // console.log(isNaN(letter))
-          if(isNaN(letter)) {
+          if(isNaN(letter) || letter === '') {
             // letter = '0';
             return false;
           }
@@ -203,9 +203,9 @@ let appData = {
     incomeItems = document.querySelectorAll('.income-items');
     document.querySelectorAll('input').forEach(function(item) {
       if(item.getAttribute('placeholder') === 'Наименование'){
-        item.onkeypress = function(event) {
-          item.value = item.value.replace(/[^а-яА-Я,.!?"';: ]/, '');
-        };
+        item.addEventListener('input', function(event) {
+          item.value = item.value.replace(/[^а-яА-Я,.!?"';:]/,'');
+        });
         // console.log(item);
       };
     })
@@ -216,7 +216,7 @@ let appData = {
           let letter = event.key;
           // console.log(letter)
           // console.log(isNaN(letter))
-          if(isNaN(letter)) {
+          if(isNaN(letter) || letter === ' ') {
             // letter = '0';
             return false;
           }
@@ -307,6 +307,17 @@ let appData = {
       item.removeAttribute('disabled', 0);   
       // let deleteClone = document.querySelector()
   })
+    for(let key in appData.expenses) {
+    delete appData.expenses[key];
+    }
+    for(let key in appData.income) {
+      delete appData.income[key];
+    }
+    appData.budgetDay = 0;
+    appData.budgetMonth = 0;
+    appData.expensesMonth = 0;
+    appData.addIncome = [];
+    appData.addExpenses = [];
     periodSelect.value = 1;
     periodAmount.innerHTML = 1;
     expensesPlus.setAttribute('style', 'display: block;');
@@ -348,7 +359,7 @@ inputsSum.forEach(function(item) {
       let letter = event.key;
       // console.log(letter)
       // console.log(isNaN(letter))
-      if(isNaN(letter)) {
+      if(isNaN(letter) || letter === ' ') {
         // letter = '0';
         return false;
       }
@@ -358,9 +369,9 @@ inputsSum.forEach(function(item) {
 })
 inputsName.forEach(function(item) {
   if(item.getAttribute('placeholder') === 'Наименование'){
-    item.onkeypress = function(event) {
-      item.value = item.value.replace(/[^а-яА-Я,.!?"';: ]/, '');
-    };
+    item.addEventListener('input', function(event) {
+      item.value = item.value.replace(/[^а-яА-Я,.!?"';:]/,'');
+    });
     // console.log(item);
   };
 })
