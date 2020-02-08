@@ -307,6 +307,7 @@ let appData = {
       item.removeAttribute('disabled', 0);   
       // let deleteClone = document.querySelector()
   })
+   
     for(let key in appData.expenses) {
     delete appData.expenses[key];
     }
@@ -338,6 +339,7 @@ let appData = {
   }
     cancel.setAttribute('style', 'display: none');
     start.setAttribute('style', 'display: block');
+    checkMonth ()
 }
 }
 
