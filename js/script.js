@@ -328,6 +328,9 @@ let appData = {
       let expenses = document.querySelector('.expenses');
       expenses.removeChild(expensesItems[i]);
     }
+    // console.log(document.querySelector('.deposit-check').checked);
+    console.log(checkbox.checked);
+    checkbox.checked = false;
     if(incomeItems.length>1){
     for(let j=0; j<incomeItems.length; j++){
       incomeItems = document.querySelectorAll('.income-items');
@@ -336,9 +339,11 @@ let appData = {
       // console.log(incomes, incomeItems)
       incomes.removeChild(incomeItems[j]);
     }
-  }
+  } 
+    
     cancel.setAttribute('style', 'display: none');
     start.setAttribute('style', 'display: block');
+    
     checkMonth ()
 }
 }
