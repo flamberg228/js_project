@@ -271,10 +271,19 @@ start.addEventListener('click', function (event) {
   }
   // console.log(this);
 });
+let str;
+let inputs = document.querySelectorAll('input');
+// console.log(inp1.getAttribute('placeholder'));
 
-// appData.getAddExpenses.bind(appData);
-// appData.getAddIncome.bind(appData);
-// appData.start.bind(appData);
+// inputs.forEach(function(item) {
+//   if(item.getAttribute('placeholder') === 'Сумма'){
+//     item.addEventListener.onkeypress = function(event) {
+//       console.log(event)
+//       // if()
+//     }
+//   }
+// })
+
 cancel.addEventListener('click', appData.getReset)
 // console.log(this.cancel);
 expensesPlus.addEventListener('click', appData.addExpensesBlock);
