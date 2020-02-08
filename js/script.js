@@ -36,6 +36,7 @@ let inputs = document.querySelectorAll('input');
 let periodAmount = document.querySelector('.period-amount');
 // money = 10000; // доход за месяц 
 let cloneExpensesItem;
+let inputsName = document.querySelectorAll('input');
 
 let appData = {
   income: {},
@@ -133,17 +134,40 @@ let appData = {
   addExpensesBlock: function () {
     
     cloneExpensesItem = expensesItems[0].cloneNode(true);
+    // cloneExpensesItem.children[0].onkeypress = function (event) {
+    //   cloneExpensesItem.children[0].value.replace(/[^а-яА-Я,.!?"';: ]/, '');
+    // }
+    // cloneExpensesItem.children[1].onkeypress = function (event) {
+    //   cloneExpensesItem.children[1].value.replace(/[^а-яА-Я,.!?"';: ]/, '');
+    // }
     cloneExpensesItem.children[0].value = '';
     cloneExpensesItem.children[1].value = '';
-    cloneExpensesItem.children[0].onkeypress = function (event) {
-      cloneExpensesItem.children[0].value = cloneExpensesItem.children[0].value.replace(/[^а-яА-Я,.!?"';: ]/, '');
-    }
-    cloneExpensesItem.children[1].onkeypress = function (event) {
-      cloneExpensesItem.children[1].value = cloneExpensesItem.children[1].value.replace(/[^а-яА-Я,.!?"';: ]/, '');
-    }
+    
     expensesItems[0].parentNode.insertBefore(cloneExpensesItem, expensesPlus);
     // let itemExpenses = item.querySelectorAll('.expenses-title').value;
-    
+    document.querySelectorAll('input').forEach(function(item) {
+      if(item.getAttribute('placeholder') === 'Наименование'){
+        item.onkeypress = function(event) {
+          item.value = item.value.replace(/[^а-яА-Я,.!?"';: ]/, '');
+        };
+        // console.log(item);
+      };
+    })
+    document.querySelectorAll('input').forEach(function(item) {
+      if(item.getAttribute('placeholder') === 'Сумма'){
+        item.onkeypress = function(event) {
+          // console.log(event)
+          let letter = event.key;
+          // console.log(letter)
+          // console.log(isNaN(letter))
+          if(isNaN(letter)) {
+            // letter = '0';
+            return false;
+          }
+        };
+        // console.log(item);
+      };
+    })
     expensesItems = document.querySelectorAll('.expenses-items');
     // for(let i=1;i<expensesItems.length;i++){
     //   let item2 = document.querySelectorAll('.expenses-amount');
@@ -157,6 +181,7 @@ let appData = {
     if(expensesItems.length === 3)  {
       expensesPlus.setAttribute('style', 'display: none');
     }
+
   },
   getExpenses: function() {
     expensesItems.forEach(function (item){
@@ -176,7 +201,29 @@ let appData = {
     cloneIncome.children[1].value = '';
     incomeItems[0].parentNode.insertBefore(cloneIncome, incomePlus);
     incomeItems = document.querySelectorAll('.income-items');
-
+    document.querySelectorAll('input').forEach(function(item) {
+      if(item.getAttribute('placeholder') === 'Наименование'){
+        item.onkeypress = function(event) {
+          item.value = item.value.replace(/[^а-яА-Я,.!?"';: ]/, '');
+        };
+        // console.log(item);
+      };
+    })
+    document.querySelectorAll('input').forEach(function(item) {
+      if(item.getAttribute('placeholder') === 'Сумма'){
+        item.onkeypress = function(event) {
+          // console.log(event)
+          let letter = event.key;
+          // console.log(letter)
+          // console.log(isNaN(letter))
+          if(isNaN(letter)) {
+            // letter = '0';
+            return false;
+          }
+        };
+        // console.log(item);
+      };
+    })
 
     if(incomeItems.length === 3) {
       incomePlus.setAttribute('style', 'display: none;');
@@ -291,7 +338,7 @@ salaryAmount.addEventListener('input', checkMonth);
 start.addEventListener('click', appData.start.bind(appData));
 
 let inputsSum = document.querySelectorAll('input');
-let inputsName = document.querySelectorAll('input');
+
 // console.log(inp1.getAttribute('placeholder'));
 
 inputsSum.forEach(function(item) {
