@@ -15,7 +15,7 @@ domElement.prototype.makeElement = function () {
     this.element.innerHTML = 'lorem';
   } else if(this.selector[0] === '#') {
     this.element = document.createElement('p')
-    this.element.className = this.selector.substring(1);
+    this.element.id = this.selector.substring(1);
     this.element.innerHTML = 'ipsum';
   }
   this.element.style.cssText = 'height: ' + height + 'px; width: ' + width + 'px; background: ' + bg + '; font-size:' + fontSize + 'px;' + 'margin:' + position;
