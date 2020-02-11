@@ -144,12 +144,6 @@ let AppData =  function () {
   AppData.prototype.addExpensesBlock = function () {
     
     cloneExpensesItem = expensesItems[0].cloneNode(true);
-    // cloneExpensesItem.children[0].onkeypress = function (event) {
-    //   cloneExpensesItem.children[0].value.replace(/[^а-яА-Я,.!?"';: ]/, '');
-    // }
-    // cloneExpensesItem.children[1].onkeypress = function (event) {
-    //   cloneExpensesItem.children[1].value.replace(/[^а-яА-Я,.!?"';: ]/, '');
-    // }
     cloneExpensesItem.children[0].value = '';
     cloneExpensesItem.children[1].value = '';
     
@@ -179,15 +173,6 @@ let AppData =  function () {
       };
     })
     expensesItems = document.querySelectorAll('.expenses-items');
-    // for(let i=1;i<expensesItems.length;i++){
-    //   let item2 = document.querySelectorAll('.expenses-amount');
-    //   // console.log(item1)
-    //   item2[i].value = '';
-    // }
-    // for(let i=2;i<4;i++) {
-    //   let item1 = document.querySelectorAll('.expenses-title');
-    //   item1[i].value = '';
-    // }
     if(expensesItems.length === 3)  {
       expensesPlus.setAttribute('style', 'display: none');
     }
@@ -361,21 +346,6 @@ let AppData =  function () {
       console.log(move3);
     } 
     incomeItems = document.querySelectorAll('.income-items');
-  // } 
-  // if(incomeItems.length === 3){
-  //   for(let j=1; j<incomeItems.length; j++){
-  //     // incomeItems = document.querySelectorAll('.income-items');
-  //     // expensesItems[i+1].setAttribute('style', 'display: none');
-  //     let incomes;
-  //     incomes = document.querySelector('.income');
-  //     // console.log(incomes, incomeItems)
-  //     let move3 = incomes.removeChild(incomeItems[j]);
-  //     incomeItems = document.querySelectorAll('.income-items');
-  //     console.log(move3);
-  //   } 
-  // } 
-  //   console.log();
-  // }
     
     cancel.setAttribute('style', 'display: none');
     start.setAttribute('style', 'display: block');
@@ -426,26 +396,3 @@ AppData.prototype.eventListeners = function () {
 }
 let appData = new AppData();
 appData.eventListeners();
-
-
-
-
-
-
-
-
-// console.log(inp1.getAttribute('placeholder'));
-
-
-// periodSelect.addEventListener('input', appData.showResult);
-
-
-// console.log('Наша команда включает в себя данные: ')
-// let output = function (objects) {
-// for(let key in objects) {
-//   console.log('Свойство ' + key + ' значение ' + objects[key])
-// }
-// }
-// // output(appData);
-// // appData.getInfoDeposit();
-// // console.log(appData.calcSavedMoney());

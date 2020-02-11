@@ -18,7 +18,7 @@ domElement.prototype.makeElement = function () {
     this.element.className = this.selector.substring(1);
     this.element.innerHTML = 'ipsum';
   }
-  this.element.style = 'height: ' + height + 'px; width: ' + width + 'px; background: ' + bg + '; font-size:' + fontSize + 'px;' + 'margin:' + position;
+  this.element.style.cssText = 'height: ' + height + 'px; width: ' + width + 'px; background: ' + bg + '; font-size:' + fontSize + 'px;' + 'margin:' + position;
   let body = document.querySelector('body');
   body.append(this.element);
 }
