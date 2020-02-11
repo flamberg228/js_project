@@ -379,53 +379,64 @@ let AppData =  function () {
     
     cancel.setAttribute('style', 'display: none');
     start.setAttribute('style', 'display: block');
-    
+    function checkMonth () {
+      start.disabled = !salaryAmount.value.trim();
+    }
     checkMonth ()
 }
-
-let appData = new AppData();
-console.log(appData);
-
-function checkMonth () {
-  start.disabled = !salaryAmount.value.trim();
+AppData.prototype.eventListeners = function () {
+  console.log(this)
+  function checkMonth () {
+    start.disabled = !salaryAmount.value.trim();
+  }
+  checkMonth ()
+  salaryAmount.addEventListener('input', checkMonth);
+  start.addEventListener('click', this.start.bind(this));
+  let inputsSum = document.querySelectorAll('input');
+  inputsSum.forEach(function(item) {
+    if(item.getAttribute('placeholder') === 'Сумма'){
+      item.onkeypress = function(event) {
+        // console.log(event)
+        let letter = event.key;
+        // console.log(letter)
+        // console.log(isNaN(letter))
+        if(isNaN(letter) || letter === ' ') {
+          // letter = '0';
+          return false;
+        }
+      };
+      // console.log(item);
+    };
+  })
+  inputsName.forEach(function(item) {
+    if(item.getAttribute('placeholder') === 'Наименование'){
+      item.addEventListener('input', function(event) {
+        item.value = item.value.replace(/[^а-яА-Я,.!?"';:]/,'');
+      });
+      // console.log(item);
+    };
+  })
+  
+  cancel.addEventListener('click', this.getReset.bind(this))
+  // console.log(this.cancel);
+  expensesPlus.addEventListener('click', this.addExpensesBlock);
+  incomePlus.addEventListener('click', this.addIncomeBlock);
+  periodSelect.addEventListener('input', this.addPeriod.bind(this));
+  
 }
-checkMonth ()
-salaryAmount.addEventListener('input', checkMonth);
-start.addEventListener('click', appData.start.bind(appData));
+let appData = new AppData();
+appData.eventListeners();
 
-let inputsSum = document.querySelectorAll('input');
+
+
+
+
+
+
 
 // console.log(inp1.getAttribute('placeholder'));
 
-inputsSum.forEach(function(item) {
-  if(item.getAttribute('placeholder') === 'Сумма'){
-    item.onkeypress = function(event) {
-      // console.log(event)
-      let letter = event.key;
-      // console.log(letter)
-      // console.log(isNaN(letter))
-      if(isNaN(letter) || letter === ' ') {
-        // letter = '0';
-        return false;
-      }
-    };
-    // console.log(item);
-  };
-})
-inputsName.forEach(function(item) {
-  if(item.getAttribute('placeholder') === 'Наименование'){
-    item.addEventListener('input', function(event) {
-      item.value = item.value.replace(/[^а-яА-Я,.!?"';:]/,'');
-    });
-    // console.log(item);
-  };
-})
 
-cancel.addEventListener('click', appData.getReset.bind(appData))
-// console.log(this.cancel);
-expensesPlus.addEventListener('click', appData.addExpensesBlock);
-incomePlus.addEventListener('click', appData.addIncomeBlock);
-periodSelect.addEventListener('input', appData.addPeriod.bind(appData));
 // periodSelect.addEventListener('input', appData.showResult);
 
 
