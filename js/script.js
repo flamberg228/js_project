@@ -243,32 +243,6 @@ class AppData {
     // console.log(this);
     });
   };
-  // getAddExpInc() {
-  //   
-  //   const count = (item) => {
-  //     const str = item.className.split('-')[0];
-  //     const itemClass = item.querySelector(`.additional_${str}-item`);
-  //     // const itemPush = add
-  //     item = item.trim();
-  //     if(item === additionalExpensesItem) {
-  //       item = additionalExpensesItem.value.split(',');
-  //       if(item !== '') {
-  //         this.addExpenses.push(item);
-  //         }; 
-  //     }
-  //     if(item === additionalIncomeItem) {
-  //       this.itemClass.push(item);
-  //       if(item !== '') {
-  //         this.addIncome.push(item);
-  //         }; 
-  //       }; 
-  //   }
-
-  //   additionalIncomeItem.forEach(count)
-  //   additionalExpensesItem.forEach(count)
-    
-  // }
-
   addPeriod(event) {
     // console.log(event.type);
 
