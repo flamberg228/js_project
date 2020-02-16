@@ -101,7 +101,10 @@ class AppData {
       } else if(isNaN(depositAmount.value) || depositAmount.value === '') {
         alert('Введите сумму депозита')
         return;
-      } 
+      } else if(salaryAmount.value === '') {
+        start.disabled = true;
+        return;
+      }
     } 
     
     this.getBlocked();
