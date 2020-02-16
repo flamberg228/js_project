@@ -101,8 +101,9 @@ class AppData {
       } else if(isNaN(depositAmount.value) || depositAmount.value === '') {
         alert('Введите сумму депозита')
         return;
-      }
-    }
+      } 
+    } 
+    
     this.getBlocked();
     console.log(this);
     this.budget = salaryAmount.value;
@@ -370,6 +371,10 @@ class AppData {
         depositBank.value = '';
         depositAmount.value = '';
         this.deposit = false;
+        if(!depositCheck.checked && salaryAmount.value === '') {
+          start.disabled = true;
+          return;
+        }
         // depositBank.removeEventListener('change', this.changePercent);
       }
     }
