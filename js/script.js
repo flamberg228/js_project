@@ -91,7 +91,18 @@ class AppData {
     };
 
   start() {
-   
+    if(depositCheck.checked){
+      if(document.querySelector('select').selectedIndex === 0) {
+        alert('Выберите проценты');
+        return;
+      } else if(isNaN(depositPercent.value) || depositPercent.value === '' || depositPercent.value < 0 || depositPercent.value > 100) {
+        alert('Введите процент от одного до ста')
+        return;
+      } else if(isNaN(depositAmount.value) || depositAmount.value === '') {
+        alert('Введите сумму депозита')
+        return;
+      }
+    }
     this.getBlocked();
     console.log(this);
     this.budget = salaryAmount.value;
@@ -181,24 +192,24 @@ class AppData {
     incomeItems[0].parentNode.insertBefore(cloneIncome, incomePlus);
     incomeItems = document.querySelectorAll('.income-items');
     document.querySelectorAll('input').forEach((item) => {
-    if(item.getAttribute('placeholder') === 'Наименование'){
-    item.addEventListener('input', (event) => {
-    item.value = item.value.replace(/[^а-яА-Я,.!?"';:]/,'');
-    });
-    // console.log(item);
-    };
+      if(item.getAttribute('placeholder') === 'Наименование'){
+        item.addEventListener('input', (event) => {
+          item.value = item.value.replace(/[^а-яА-Я,.!?"';:]/,'');
+        });
+      // console.log(item);
+      };
     })
     document.querySelectorAll('input').forEach((item) => {
-    if(item.getAttribute('placeholder') === 'Сумма'){
-    item.onkeypress = (event) => {
-    const letter = event.key;
-    if(isNaN(letter) || letter === ' ') {
-    // letter = '0';
-    return false;
-    }
-    };
-    // console.log(item);
-    };
+      if(item.getAttribute('placeholder') === 'Сумма'){
+        item.onkeypress = (event) => {
+          const letter = event.key;
+          if(isNaN(letter) || letter === ' ') {
+            // letter = '0';
+            return false;
+          }
+        };
+        // console.log(item);
+      };
     })
 
     if(incomeItems.length === 3) {
@@ -206,13 +217,12 @@ class AppData {
     }
   };
   getIncome() {
-    
     incomeItems.forEach((item) => {
-    const itemIncome = item.querySelector('.income-title').value;
-    const cashIncome = item.querySelector('.income-amount').value;
-    if(cashIncome !== '' && itemIncome !== '') {
-    this.income[itemIncome] = +cashIncome;
-    };
+      const itemIncome = item.querySelector('.income-title').value;
+      const cashIncome = item.querySelector('.income-amount').value;
+      if(cashIncome !== '' && itemIncome !== '') {
+        this.income[itemIncome] = +cashIncome;
+      };
     });     
   };
   getIncomeMonth() {
@@ -325,18 +335,16 @@ class AppData {
       console.log(depositBank.value)
       start.disabled = false;
       if(valueSelect === '') {
-        start.disabled = true;
+        // start.disabled = true;
       }
       if(valueSelect === 'other') {
-        start.disabled = true;
+        // start.disabled = true;
         depositPercent.style.display = 'inline-block';
         // valueSelect = '';
         depositPercent.value = '';
         // if(depositPercent.value === isNaN || depositPercent.value === '' || depositPercent.value < 0 || depositPercent.value < 100) {
         //   depositPercentValue = 0;
         // } 
-        
-       
       } else {
         depositPercent.value = valueSelect;
         depositPercent.style.display = 'none';
@@ -355,7 +363,7 @@ class AppData {
         depositAmount.style.display = 'inline-block';
         this.deposit = true;
         depositBank.addEventListener('change', this.changePercent);
-        start.disabled = true;
+        // start.disabled = true;
       } else {
         depositBank.style.display = 'none';
         depositAmount.style.display = 'none';
@@ -367,27 +375,35 @@ class AppData {
     }
     eventListeners() {
       console.log(this)
+      start.disabled = true;
+      // let depCheck3 = () => {
+      //   if(isNaN(depositPercent.value) || depositPercent.value === '' || depositPercent.value < 0 || depositPercent.value > 100) {
+      //     start.disabled = true;
+      //     // alert('Введите число от одного до 100')
+      //     // String(depositPercent.value[2]) = '';
+      //   } else {
+      //     start.disabled = false;
+      //   }
+      // }
+      // salaryAmount.addEventListener('input', () => {
+      //   if(isNaN(depositAmount.value) || depositAmount.value === '') {
+      //     start.disabled = true;
+      //   } else {
+      //     start.disabled = false;
+      //   }
+      // })
+      // // depCheck3();
+      // depositPercent.addEventListener('input', depCheck3);
       // start.disabled = true;
-      let depCheck3 = () => {
-        if(isNaN(depositPercent.value) || depositPercent.value === '' || depositPercent.value < 0 || depositPercent.value > 100) {
-          start.disabled = true;
-          alert('Введите число от одного до 100')
-          // String(depositPercent.value[2]) = '';
-        } else {
-          start.disabled = false;
-        }
-      }
-      // depCheck3();
-      depositPercent.addEventListener('input', depCheck3);
-      const checkMonth = () => {
+      let checkMonth = () => {
         start.disabled = !salaryAmount.value.trim();
-        if(depositCheck.checked ) {
-        start.disabled = true;
-        } else {
-          start.disabled = false;
-        }
+        // if(depositCheck.checked ) {
+        // start.disabled = true;
+        // } else {
+        //   start.disabled = false;
+        // }
       }
-
+      salaryAmount.addEventListener('input', checkMonth);
       start.addEventListener('click', this.start.bind(this));
       let inputsSum = document.querySelectorAll('input');
       inputsSum.forEach((item) =>{
