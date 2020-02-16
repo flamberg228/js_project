@@ -104,9 +104,7 @@ class AppData {
       } else if(salaryAmount.value === '') {
         start.disabled = true;
         return;
-      } else  {
-        depositPercent.style.display = 'none';
-      }
+      } 
     } 
     
     this.getBlocked();
