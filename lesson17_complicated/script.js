@@ -2,7 +2,7 @@
 let btn = document.querySelector('.animation')
 let square = document.querySelector('.square');
 let count = 0;
-let anim = false;
+let anim = true;
 let flyInterval;
 let restart = document.querySelector('.restart');
 function squareMove () {

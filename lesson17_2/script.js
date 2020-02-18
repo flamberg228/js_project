@@ -1,48 +1,54 @@
 let dayMas = ['Понедельник,', 'Вторник,', 'Среда,', 'Четверг,', 'Пятница,', 'Суббота,'.italics(), 'Воскресенье,'.italics()];
 
-let day, year, hour, minutes, seconds, greeting;
+let day, year, hour, minutes, seconds, greetings;
 
 function getDayRamaining() {
-    day = new Date().getDay(),
+    day = new Date().getDay();
 
-    year = new Date().getFullYear(),
-    hour = new Date().getHours(),
-    minutes = new Date().getMinutes(),
+    year = new Date().getFullYear();
+    hour = new Date().getHours();
+    minutes = new Date().getMinutes();
     seconds = new Date().getSeconds();
     dateNow = new Date().getTime();
-
+    let hours = hour;
     let dateStop = new Date('1 january 2021').getTime();
 
     console.log(year, dateNow)
     let diff = +dateStop - +dateNow;
     let days = Math.floor(diff / 60 / 60 / 24 /1000 + 1);
     console.log(days);
-    if(hour <= 11 && hour > 6){ 
-      greeting = 'Доброе утро';
-    } else if (hour >=12 && hour < 17) {
-      greeting = 'Добрый день';
-    } else if(hour >= 17 && hour < 22) {
-      greeting = 'Добрый вечер';
-    } else if(hour >= 22 && hour < 6) {
-      greeting = 'Доброй ночи';
-    }
+    // console.log(hour);
+    
+   
+    // console.log(greetings);
     if(day === 0) {
       day = 6;
     }
     else if(day > 0) {
       day = day - 1;
     }
-    return {day, year, hour, minutes, seconds, dateNow, greeting, days}
+    console.log(hours)
+    if(hours <= 11 && hours > 6){ 
+      greetings = 'Доброе утро';
+    } else if(hours >=12 && hours < 17) {
+      greetings = 'Добрый день';
+    } else if(hours >= 17 && hours < 22) {
+      greetings = 'Добрый вечер';
+    } else if(hours >= 22 && hours < 6) {
+      greetings = 'Доброй ночи';
+    }
+    return {day, year, hour, minutes, seconds, dateNow, greetings, days}
 }
 timer = getDayRamaining();
-document.querySelector('.greetings').textContent = timer.greeting;
+
+document.querySelector('.greetings').textContent = timer.greetings;
 document.querySelector('.today').textContent = dayMas[timer.day];
 document.querySelector('.time').textContent = addZero(timer.hour) + ':' + addZero(timer.minutes) + ':' + addZero(timer.seconds) + ' PM';
 document.querySelector('.year').textContent = timer.days;
 
 function updateClock() {
   timer = getDayRamaining();
-  document.querySelector('.greetings').textContent = timer.greeting;
+  document.querySelector('.greetings').textContent = timer.greetings;
   document.querySelector('.today').textContent = dayMas[timer.day];
   document.querySelector('.time').textContent = addZero(timer.hour) + ':' + addZero(timer.minutes) + ':' + addZero(timer.seconds) + ' PM';
   document.querySelector('.year').textContent = timer.days;
