@@ -89,7 +89,7 @@ window.addEventListener('DOMContentLoaded', function () {
       else {
         let train = function () {
           trainInterval = requestAnimationFrame(train);
-          count = count +2;
+          count = count +3;
           // console.log(menu.getBoundingClientRect());
           if(count <= 100) {
             menu.style.left = `${count}%`;
@@ -108,7 +108,7 @@ window.addEventListener('DOMContentLoaded', function () {
       } else {
         let train = function () {
           trainInterval = requestAnimationFrame(train);
-          count = count -2;
+          count = count -3;
           // console.log(menu.getBoundingClientRect());
           if(count >= 0) {
             menu.style.left = `${count}%`;
@@ -129,7 +129,7 @@ window.addEventListener('DOMContentLoaded', function () {
         } else {
           let train = function () {
             trainInterval = requestAnimationFrame(train);
-            count = count -2;
+            count = count -3;
             // console.log(menu.getBoundingClientRect());
             if(count >= 0) {
               menu.style.left = `${count}%`;
@@ -140,7 +140,32 @@ window.addEventListener('DOMContentLoaded', function () {
           train();
         }
       });
+    });
+    let heroAnchor = document.querySelectorAll('a')[0];
+    let anchorEnd = document.getElementById(heroAnchor.getAttribute('href').substr(1));
+    heroAnchor.addEventListener('click', (event) => {
+      event.preventDefault();
+      anchorEnd.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      })
     })
+
+    // скрипт плавной прокрутки элементов меню
+
+    let anchors = document.querySelectorAll('li>a');
+    anchors.forEach((item) => {
+      item.addEventListener('click', (event) => {
+        event.preventDefault();
+        const anchor = item.getAttribute('href').substr(1)
+        console.log(anchor)
+        document.getElementById(anchor).scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        })
+      })
+    })
+    console.log(anchors);
   };
   toggleMenu();
 
@@ -159,18 +184,5 @@ window.addEventListener('DOMContentLoaded', function () {
     });
   };
   togglePopUp();
-  // скрипт плавной прокрутки 
-  // const anchors = document.querySelectorAll('a[href*="#"]')
-  // for (let anchor of anchors) {
-  //   anchor.addEventListener('click', function (e) {
-  //     e.preventDefault()
-      
-  //     const blockID = anchor.getAttribute('href').substr(1)
-      
-  //     document.getElementById(blockID).scrollIntoView({
-  //       behavior: 'smooth',
-  //       block: 'start'
-  //     })
-  //   })
-  // }
+
 });
