@@ -7,6 +7,7 @@ window.addEventListener('DOMContentLoaded', function () {
         timerSeconds = document.querySelector('#timer-seconds');
     
     // таймер
+    
     function getTimeRemaining() {
       let dateStop = new Date(deadline).getTime(),
       dateNow = new Date().getTime(),
@@ -64,6 +65,7 @@ window.addEventListener('DOMContentLoaded', function () {
   countTimer('18 july 2020')
 
   // меню 
+
   const toggleMenu = () => {
     const btnMenu = document.querySelector('.menu'),
           menu = document.querySelector('menu'),
@@ -92,7 +94,7 @@ window.addEventListener('DOMContentLoaded', function () {
           count = count +3;
           // console.log(menu.getBoundingClientRect());
           if(count <= 100) {
-            menu.style.left = `${count}%`;
+            menu.style.left = `${count + 1}%`;
           } else {
             cancelAnimationFrame(trainInterval);
           }
