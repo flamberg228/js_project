@@ -5,7 +5,8 @@ window.addEventListener('DOMContentLoaded', function () {
     let timerHours = document.querySelector('#timer-hours'),
         timerMinutes = document.querySelector('#timer-minutes'),
         timerSeconds = document.querySelector('#timer-seconds');
-
+    
+    // таймер
     function getTimeRemaining() {
       let dateStop = new Date(deadline).getTime(),
       dateNow = new Date().getTime(),
@@ -59,8 +60,83 @@ window.addEventListener('DOMContentLoaded', function () {
         clearInterval(idInterval);
       };
     }, 1000);
-    
-    // let idInterval = setInterval(updateClock, 1000);
   };
-  countTimer('18 february 2020')
+  countTimer('18 july 2020')
+
+  // меню 
+  const toggleMenu = () => {
+    const btnMenu = document.querySelector('.menu'),
+          menu = document.querySelector('menu'),
+          closeBtn = document.querySelector('.close-btn'),
+          menuItems = document.querySelectorAll('ul>li');
+    let widthScreen = document.documentElement.clientWidth;
+    let trainInterval;
+    let count = 0;
+ 
+    // btnMenu.addEventListener('click', train);
+
+    const handlerMenu = () => {
+      // menu.classList.toggle('active-menu');
+      // console.log(menu.getBoundingClientRect());
+      widthScreen = document.documentElement.clientWidth;
+      if(widthScreen < 768) {
+        menu.style.transform = `translate(0)`;
+        return;
+      } else {
+        let train = function () {
+          trainInterval = requestAnimationFrame(train);
+          count = count +2;
+          // console.log(menu.getBoundingClientRect());
+          if(count <= 100) {
+            menu.style.left = `${count}%`;
+          } else {
+            cancelAnimationFrame(trainInterval);
+          }
+        }
+        train();
+      }
+    }
+    btnMenu.addEventListener('click', handlerMenu);
+    closeBtn.addEventListener('click', () => {
+      widthScreen = document.documentElement.clientWidth;
+      if(widthScreen < 768) {
+        menu.style.transform = `translate(-100%)`;
+        return;
+      } else {
+        let train = function () {
+          trainInterval = requestAnimationFrame(train);
+          count = count -2;
+          // console.log(menu.getBoundingClientRect());
+          if(count >= 0) {
+            menu.style.left = `${count}%`;
+          } else {
+            cancelAnimationFrame(trainInterval);
+          }
+        }
+        train();
+      }
+     
+    })
+    menuItems.forEach((item) => {
+      item.addEventListener('click', handlerMenu);
+    })
+  };
+  toggleMenu();
+  
+  const togglePopUp = () => {
+    const popup = document.querySelector('.popup'),
+    popupBtn = document.querySelectorAll('.popup-btn'),
+    popUpClose = document.querySelector('.popup-close');
+
+    popupBtn.forEach((item) => {
+      item.addEventListener('click', () => {
+        popup.style.display = 'block';
+      });
+    });
+    popUpClose.addEventListener('click', () => {
+      popup.style.display = 'none';
+    });
+  };
+  togglePopUp();
+
 });
