@@ -78,6 +78,9 @@ window.addEventListener('DOMContentLoaded', function () {
     const handlerMenu = () => {
       // menu.classList.toggle('active-menu');
       // console.log(menu.getBoundingClientRect());
+     
+    }
+    btnMenu.addEventListener('click', () => {
       widthScreen = document.documentElement.clientWidth;
       if(widthScreen < 768) {
         menu.style.transform = `translate(0)`;
@@ -95,8 +98,7 @@ window.addEventListener('DOMContentLoaded', function () {
         }
         train();
       }
-    }
-    btnMenu.addEventListener('click', handlerMenu);
+    });
     closeBtn.addEventListener('click', () => {
       widthScreen = document.documentElement.clientWidth;
       if(widthScreen < 768) {
@@ -118,11 +120,13 @@ window.addEventListener('DOMContentLoaded', function () {
      
     })
     menuItems.forEach((item) => {
-      item.addEventListener('click', handlerMenu);
+      item.addEventListener('click', () => {
+        menu.style.transform = `translate(0)`;
+      });
     })
   };
   toggleMenu();
-  
+
   const togglePopUp = () => {
     const popup = document.querySelector('.popup'),
     popupBtn = document.querySelectorAll('.popup-btn'),
@@ -138,5 +142,18 @@ window.addEventListener('DOMContentLoaded', function () {
     });
   };
   togglePopUp();
-
+  // скрипт плавной прокрутки 
+  const anchors = document.querySelectorAll('a[href*="#"]')
+  for (let anchor of anchors) {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault()
+      
+      const blockID = anchor.getAttribute('href').substr(1)
+      
+      document.getElementById(blockID).scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      })
+    })
+  }
 });
