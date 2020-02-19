@@ -7,6 +7,7 @@ window.addEventListener('DOMContentLoaded', function () {
         timerSeconds = document.querySelector('#timer-seconds');
     
     // таймер
+    
     function getTimeRemaining() {
       let dateStop = new Date(deadline).getTime(),
       dateNow = new Date().getTime(),
@@ -64,6 +65,7 @@ window.addEventListener('DOMContentLoaded', function () {
   countTimer('18 july 2020')
 
   // меню 
+
   const toggleMenu = () => {
     const btnMenu = document.querySelector('.menu'),
           menu = document.querySelector('menu'),
@@ -89,10 +91,10 @@ window.addEventListener('DOMContentLoaded', function () {
       else {
         let train = function () {
           trainInterval = requestAnimationFrame(train);
-          count = count +2;
+          count = count +3;
           // console.log(menu.getBoundingClientRect());
           if(count <= 100) {
-            menu.style.left = `${count}%`;
+            menu.style.left = `${count + 1}%`;
           } else {
             cancelAnimationFrame(trainInterval);
           }
@@ -108,7 +110,7 @@ window.addEventListener('DOMContentLoaded', function () {
       } else {
         let train = function () {
           trainInterval = requestAnimationFrame(train);
-          count = count -2;
+          count = count -3;
           // console.log(menu.getBoundingClientRect());
           if(count >= 0) {
             menu.style.left = `${count}%`;
@@ -129,7 +131,7 @@ window.addEventListener('DOMContentLoaded', function () {
         } else {
           let train = function () {
             trainInterval = requestAnimationFrame(train);
-            count = count -2;
+            count = count -3;
             // console.log(menu.getBoundingClientRect());
             if(count >= 0) {
               menu.style.left = `${count}%`;
@@ -140,18 +142,62 @@ window.addEventListener('DOMContentLoaded', function () {
           train();
         }
       });
+    });
+    let heroAnchor = document.querySelectorAll('a')[0];
+    let anchorEnd = document.getElementById(heroAnchor.getAttribute('href').substr(1));
+    heroAnchor.addEventListener('click', (event) => {
+      event.preventDefault();
+      anchorEnd.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      })
     })
+
+    // скрипт плавной прокрутки элементов меню
+
+    let anchors = document.querySelectorAll('li>a');
+    anchors.forEach((item) => {
+      item.addEventListener('click', (event) => {
+        event.preventDefault();
+        const anchor = item.getAttribute('href').substr(1)
+        console.log(anchor)
+        document.getElementById(anchor).scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        })
+      })
+    })
+    console.log(anchors);
   };
   toggleMenu();
-
+  
+  // let animationInterval;
+ 
   const togglePopUp = () => {
     const popup = document.querySelector('.popup'),
-    popupBtn = document.querySelectorAll('.popup-btn'),
-    popUpClose = document.querySelector('.popup-close');
-
+          popupBtn = document.querySelectorAll('.popup-btn'),
+          popUpClose = document.querySelector('.popup-close'),
+          popupContent = document.querySelector('.popup-content');
+    // popup.style.opacity = 0;
+    
+   
     popupBtn.forEach((item) => {
       item.addEventListener('click', () => {
         popup.style.display = 'block';
+        let count = 0;
+        popup.style.opacity = 0;
+        let opacity = function () {
+          let animInterval = requestAnimationFrame(opacity);
+          count = count + 0.05;
+          // console.log(menu.getBoundingClientRect());
+          // console.log(count);
+          if(count < 1) {
+            popup.style.opacity = `${count + 0.05}`;
+          } else if(count > 1) {
+            cancelAnimationFrame(animInterval);
+          }
+        }
+        opacity();
       });
     });
     popUpClose.addEventListener('click', () => {
@@ -159,18 +205,5 @@ window.addEventListener('DOMContentLoaded', function () {
     });
   };
   togglePopUp();
-  // скрипт плавной прокрутки 
-  // const anchors = document.querySelectorAll('a[href*="#"]')
-  // for (let anchor of anchors) {
-  //   anchor.addEventListener('click', function (e) {
-  //     e.preventDefault()
-      
-  //     const blockID = anchor.getAttribute('href').substr(1)
-      
-  //     document.getElementById(blockID).scrollIntoView({
-  //       behavior: 'smooth',
-  //       block: 'start'
-  //     })
-  //   })
-  // }
+
 });
