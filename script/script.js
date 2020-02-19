@@ -170,15 +170,45 @@ window.addEventListener('DOMContentLoaded', function () {
     console.log(anchors);
   };
   toggleMenu();
-
+  
+  // let animationInterval;
+ 
   const togglePopUp = () => {
     const popup = document.querySelector('.popup'),
-    popupBtn = document.querySelectorAll('.popup-btn'),
-    popUpClose = document.querySelector('.popup-close');
-
+          popupBtn = document.querySelectorAll('.popup-btn'),
+          popUpClose = document.querySelector('.popup-close'),
+          popupContent = document.querySelector('.popup-content');
+    // popup.style.opacity = 0;
+    
+   
     popupBtn.forEach((item) => {
       item.addEventListener('click', () => {
         popup.style.display = 'block';
+        let count = 0;
+        popupContent.style.left = 0;
+        let train = function () {
+          let trainInterval = requestAnimationFrame(train);
+          
+          
+          count = count + 1;
+          // console.log(menu.getBoundingClientRect());
+          console.log(count);
+          if(count < 38) {
+            popupContent.style.left = `${count}%`;
+          } 
+        }
+        train();
+        // let animation = function() {
+        //   let animationInterval = requestAnimationFrame(animation);
+        //   let count = count + 1;
+        //   if(count < 38) {
+        //     // popup.style.opacity = `${count}`;
+        //     popupContent.style.left = `${count}%`;
+        //   } else {
+        //     cancelAnimationFrame(animationInterval)
+        //   }
+        // }
+        // animation();
       });
     });
     popUpClose.addEventListener('click', () => {
