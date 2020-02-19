@@ -85,7 +85,8 @@ window.addEventListener('DOMContentLoaded', function () {
       if(widthScreen < 768) {
         menu.style.transform = `translate(0)`;
         return;
-      } else {
+      }
+      else {
         let train = function () {
           trainInterval = requestAnimationFrame(train);
           count = count +2;
@@ -121,7 +122,23 @@ window.addEventListener('DOMContentLoaded', function () {
     })
     menuItems.forEach((item) => {
       item.addEventListener('click', () => {
-        menu.style.transform = `translate(0)`;
+        widthScreen = document.documentElement.clientWidth;
+        if(widthScreen < 768) {
+          menu.style.transform = `translate(-100%)`;
+          return;
+        } else {
+          let train = function () {
+            trainInterval = requestAnimationFrame(train);
+            count = count -2;
+            // console.log(menu.getBoundingClientRect());
+            if(count >= 0) {
+              menu.style.left = `${count}%`;
+            } else {
+              cancelAnimationFrame(trainInterval);
+            }
+          }
+          train();
+        }
       });
     })
   };
