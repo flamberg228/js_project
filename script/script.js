@@ -143,24 +143,7 @@ window.addEventListener('DOMContentLoaded', function () {
             return;
           }
           
-      }
-      widthScreen = document.documentElement.clientWidth;
-      if(menu.style.left === `100%` && target !== menu && parent.tagName !== 'LI' && target !== closeBtn && widthScreen > 768) {
-        target = target.closest('menu')
-          if(!target) {
-            train();
-          }
-          return;
-      }
-      if( target !== menu && parent.tagName !== 'LI' && target !== closeBtn && widthScreen < 768) {
-        target = target.closest('menu')
-          if(!target) {
-            menu.style.transform = `translate(-100%)`; 
-          }
-          return;
-      } 
-      // console.log(parent.tagName)
-      if(target === closeBtn) {
+      } else if(target === closeBtn) {
         widthScreen = document.documentElement.clientWidth;
         if(widthScreen < 768) {
           menu.style.transform = `translate(-100%)`;   
@@ -178,7 +161,20 @@ window.addEventListener('DOMContentLoaded', function () {
             train();
             return;
           }
-      } 
+      } else {
+        target = target.closest('menu')
+        if(widthScreen > 768) {
+            if(!target) {
+              train();
+            }
+            return;
+        } else if (widthScreen < 768) {
+            if(!target) {
+              menu.style.transform = `translate(-100%)`; 
+            }
+            return;
+        } 
+      }
      
     })   
     // console.log(anchors);
