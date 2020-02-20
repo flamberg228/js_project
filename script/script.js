@@ -64,24 +64,49 @@ window.addEventListener('DOMContentLoaded', function () {
   };
   countTimer('18 july 2020')
 
-  // меню 
+  // скрипт плавной прокрутки якоря в hero
+  
+  let heroAnchor = document.querySelectorAll('a')[0];
+  let anchorEnd = document.getElementById(heroAnchor.getAttribute('href').substr(1));
+  heroAnchor.addEventListener('click', (event) => {
+    event.preventDefault();
+    anchorEnd.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
+    })
+  })
+
+  // скрипт плавной прокрутки элементов меню
+
+  let anchors = document.querySelectorAll('li>a');
+  anchors.forEach((item) => {
+    item.addEventListener('click', (event) => {
+      event.preventDefault();
+      const anchor = item.getAttribute('href').substr(1)
+      console.log(anchor)
+      document.getElementById(anchor).scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      })
+    })
+  })
+  
+  // меню
 
   const toggleMenu = () => {
     const btnMenu = document.querySelector('.menu'),
           menu = document.querySelector('menu'),
-          closeBtn = document.querySelector('.close-btn'),
-          menuItems = document.querySelectorAll('ul>li');
+          closeBtn = document.querySelector('.close-btn');
+          
     let widthScreen = document.documentElement.clientWidth;
     let trainInterval;
     let count = 0;
- 
-    // btnMenu.addEventListener('click', train);
 
-    const handlerMenu = () => {
-      // menu.classList.toggle('active-menu');
-      // console.log(menu.getBoundingClientRect());
+    // const handlerMenu = () => {
+    //   // menu.classList.toggle('active-menu');
+    //   // console.log(menu.getBoundingClientRect());
      
-    }
+    // }
     btnMenu.addEventListener('click', () => {
       widthScreen = document.documentElement.clientWidth;
       if(widthScreen < 768) {
@@ -89,10 +114,9 @@ window.addEventListener('DOMContentLoaded', function () {
         return;
       }
       else {
-        let train = function () {
+        let train =  () => {
           trainInterval = requestAnimationFrame(train);
           count = count +3;
-          // console.log(menu.getBoundingClientRect());
           if(count <= 100) {
             menu.style.left = `${count + 1}%`;
           } else {
@@ -102,95 +126,58 @@ window.addEventListener('DOMContentLoaded', function () {
         train();
       }
     });
-    closeBtn.addEventListener('click', () => {
-      widthScreen = document.documentElement.clientWidth;
-      if(widthScreen < 768) {
-        menu.style.transform = `translate(-100%)`;
-        return;
+    let train = () => {
+      trainInterval = requestAnimationFrame(train);
+      
+      count = count -3;
+      if(count >= 0) {
+        menu.style.left = `${count}%`;
       } else {
-        let train = function () {
-          trainInterval = requestAnimationFrame(train);
-          count = count -3;
-          // console.log(menu.getBoundingClientRect());
-          if(count >= 0) {
-            menu.style.left = `${count}%`;
-          } else {
-            cancelAnimationFrame(trainInterval);
-          }
-        }
-        train();
+        cancelAnimationFrame(trainInterval);
       }
-     
-    })
-    menuItems.forEach((item) => {
-      item.addEventListener('click', () => {
+    }
+    menu.addEventListener('click', (event) => {
+      widthScreen = document.documentElement.clientWidth;
+      let target = event.target;
+      if(target === closeBtn) {
         widthScreen = document.documentElement.clientWidth;
         if(widthScreen < 768) {
           menu.style.transform = `translate(-100%)`;
           return;
         } else {
-          let train = function () {
-            trainInterval = requestAnimationFrame(train);
-            count = count -3;
-            // console.log(menu.getBoundingClientRect());
-            if(count >= 0) {
-              menu.style.left = `${count}%`;
-            } else {
-              cancelAnimationFrame(trainInterval);
-            }
-          }
-          train();
+          train()
         }
-      });
-    });
-    let heroAnchor = document.querySelectorAll('a')[0];
-    let anchorEnd = document.getElementById(heroAnchor.getAttribute('href').substr(1));
-    heroAnchor.addEventListener('click', (event) => {
-      event.preventDefault();
-      anchorEnd.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
-      })
-    })
-
-    // скрипт плавной прокрутки элементов меню
-
-    let anchors = document.querySelectorAll('li>a');
-    anchors.forEach((item) => {
-      item.addEventListener('click', (event) => {
-        event.preventDefault();
-        const anchor = item.getAttribute('href').substr(1)
-        console.log(anchor)
-        document.getElementById(anchor).scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
-        })
-      })
-    })
+      } else if (target !== closeBtn && target !== menu){
+          widthScreen = document.documentElement.clientWidth;
+          if(widthScreen < 768) {
+            menu.style.transform = `translate(-100%)`;
+            return;
+          } else {
+            train();
+          }
+      }
+    })   
     console.log(anchors);
   };
   toggleMenu();
-  
-  // let animationInterval;
- 
+
+  // скрипт вызова модального окна 
+
   const togglePopUp = () => {
     const popup = document.querySelector('.popup'),
           popupBtn = document.querySelectorAll('.popup-btn'),
           popUpClose = document.querySelector('.popup-close'),
           popupContent = document.querySelector('.popup-content');
-    // popup.style.opacity = 0;
     
-   
     popupBtn.forEach((item) => {
       item.addEventListener('click', () => {
         popup.style.display = 'block';
         let count = 0;
         popup.style.opacity = 0;
+
         let opacity = function () {
           let animInterval = requestAnimationFrame(opacity);
           count = count + 0.05;
-          // console.log(menu.getBoundingClientRect());
-          // console.log(count);
           if(count < 1) {
             popup.style.opacity = `${count + 0.05}`;
           } else if(count > 1) {
@@ -200,10 +187,57 @@ window.addEventListener('DOMContentLoaded', function () {
         opacity();
       });
     });
+
     popUpClose.addEventListener('click', () => {
-      popup.style.display = 'none';
+      
     });
+    popup.addEventListener('click', (event) => {
+      let target = event.target;
+
+      if(target === popUpClose) {
+        popup.style.display = 'none';
+      } else {
+        target = target.closest('.popup-content') 
+        if(!target) {
+          popup.style.display = 'none';
+        }
+      }
+      
+    })
   };
   togglePopUp();
 
+  // табы
+  
+  const tabs = () => {
+    const tabHeader = document.querySelector('.service-header'),
+          tab = tabHeader.querySelectorAll('.service-header-tab'),
+          tabContent = document.querySelectorAll('.service-tab');
+    
+    const toggleTabContent = (index) => {
+      for(let i=0; i<tabContent.length; i++) {
+        if(index === i) {
+          tab[i].classList.add('active');
+          tabContent[i].classList.remove('d-none');
+        } else {
+          tab[i].classList.remove('active');
+          tabContent[i].classList.add('d-none');
+        };
+      };
+    }
+
+    tabHeader.addEventListener('click', (event) => {
+      let target = event.target;
+      target = target.closest('.service-header-tab');
+      if(target) {
+        tab.forEach((item, i) => {
+          if(item === target) {
+            console.log(tabContent[i]) 
+            toggleTabContent(i);
+          };
+        });
+      };
+    });
+  };
+  tabs();
 });
