@@ -93,12 +93,14 @@ window.addEventListener('DOMContentLoaded', function () {
   
   // меню
 
+  let widthScreen = document.documentElement.clientWidth;
+
   const toggleMenu = () => {
     const btnMenu = document.querySelector('.menu'),
           menu = document.querySelector('menu'),
           closeBtn = document.querySelector('.close-btn');
           
-    let widthScreen = document.documentElement.clientWidth;
+    
     let trainInterval;
     let count = 0;
 
@@ -171,7 +173,11 @@ window.addEventListener('DOMContentLoaded', function () {
     
     popupBtn.forEach((item) => {
       item.addEventListener('click', () => {
+        widthScreen = document.documentElement.clientWidth;
         popup.style.display = 'block';
+        if(widthScreen < 768) {
+          return;
+        }
         let count = 0;
         popup.style.opacity = 0;
 
@@ -188,9 +194,9 @@ window.addEventListener('DOMContentLoaded', function () {
       });
     });
 
-    popUpClose.addEventListener('click', () => {
+    // popUpClose.addEventListener('click', () => {
       
-    });
+    // });
     popup.addEventListener('click', (event) => {
       let target = event.target;
 
