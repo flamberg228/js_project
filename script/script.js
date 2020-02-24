@@ -373,5 +373,43 @@ window.addEventListener('DOMContentLoaded', function () {
   };
 
   slider();
+  
+  // замена фотографий в блоке НАША КОМАНДА 
 
+  const getImage = () => {
+    const team = document.getElementById('command');
+    
+    let photoItem = document.querySelectorAll('.row > div > img');
+
+    photoItem.forEach((item) => {
+      let src = item.src;
+      item.addEventListener('mouseenter', (event) => {
+        event.target.src = event.target.dataset.img;
+      });
+      item.addEventListener('mouseleave', (event) => {   
+        event.target.src = src;
+      });
+    });
+    // team.addEventListener('mouseenter', (event) => {
+    //   console.log(event.target)
+    //   if(event.target.hasAttribute('img')){
+    //     event.target.src = event.target.dataset.img;
+    //   }
+    // })
+  };
+  getImage();
+
+  // ввод только цифр в калькуляторе 
+
+  const getFigures = () => {
+    const calc = document.querySelector('.calc-block');
+    const inputs = document.querySelectorAll('.calc-block > input');
+    
+    calc.addEventListener('input', (event) => {
+      if(event.target.hasAttribute('type')) {
+        event.target.value = event.target.value.replace(/\D/g, '')
+      }
+    })
+  };
+  getFigures();
 });
