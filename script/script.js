@@ -379,7 +379,7 @@ window.addEventListener('DOMContentLoaded', function () {
   const getImage = () => {
     const team = document.getElementById('command');
     
-    let photoItem = document.querySelectorAll('.row > div > img');
+    let photoItem = document.querySelectorAll('.command > .container > .row > div > img');
 
     photoItem.forEach((item) => {
       let src = item.src;
