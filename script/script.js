@@ -434,10 +434,11 @@ window.addEventListener('DOMContentLoaded', function () {
         dayValue *= 2;
       } else if(calcDay.value && calcDay.value < 10) {
         dayValue *= 1.5;
+        dayValue = Math.round(dayValue)
       }
       if(typeValue && squareValue) {
         total = price * typeValue * squareValue * countValue * dayValue;
-        total = Math.floor(total);
+        total = total;
       } 
       
       let interval;
@@ -448,6 +449,9 @@ window.addEventListener('DOMContentLoaded', function () {
         if(count < total) {
           // if(total <= 2000) {
             count = count + 30;
+            // if(count + 30 > total) {
+            //   count = count + 1;
+            // }
             totalValue.textContent = count;
             console.log(total)
         } else if(count > total) {
