@@ -449,11 +449,7 @@ window.addEventListener('DOMContentLoaded', function () {
         if(count < total) {
           // if(total <= 2000) {
             count = count + 30;
-            // if(count + 30 > total) {
-            //   count = count + 1;
-            // }
             totalValue.textContent = count;
-            console.log(total)
         } else if(count > total) {
           count = count -16;
           totalValue.textContent = count;
@@ -473,5 +469,187 @@ window.addEventListener('DOMContentLoaded', function () {
       }
     });
   };
-  calc(100)
+  calc(100);
+
+  //send-ajax-form
+  
+  const sendForm = () => {
+    const errorMessage = 'Что-то пошло не так...',
+          loadMessage = 'Загрузка...',
+          succesMessage = 'Спасибо! Мы скоро с вами свяжемся!';
+    
+    const form = document.getElementById('form1');
+    const formModal = document.getElementById('form3');
+    const formFooter = document.getElementById('form2');
+    const statusMessage = document.createElement('div');
+    let modalInputs = document.querySelectorAll('form > div > input');
+    let footerHeroInputs = document.querySelectorAll('.row > div > input');
+    let bdy = document.querySelector('body');
+    bdy.addEventListener('input', (event) => {
+      const patternPhone = /[^0-9-\+]/;
+      const patternWriting = /[^А-Яа-яёЁ ]/
+      if(event.target.placeholder === 'Номер телефона' || event.target.placeholder ==='Ваш номер телефона') {
+        event.target.value = event.target.value.replace(patternPhone, '');
+      };
+      if(event.target.placeholder === 'Ваше имя' || event.target.placeholder === 'Ваше сообщение' ) {
+        event.target.value = event.target.value.replace(patternWriting, '');
+      }
+      if(event.target.tagName.toLowerCase() === 'input' && event.target.type !== 'number') {
+        item.addEventListener('input', () => {
+          if(!item.value.trim()){         
+            // item.style.border = 'solid 1px red';
+            item.classList.add('error');
+          } else {
+            item.classList.remove('error')
+          };
+        });
+      }
+    })
+    modalInputs.forEach((item) => {
+      item.removeAttribute('required');
+      item.value = '';
+    });
+    footerHeroInputs.forEach((item) => {
+      item.removeAttribute('required');
+      item.value = '';
+    });
+    formModal.addEventListener('submit', (event) => {
+      event.preventDefault(); 
+      statusMessage.style.cssText = `color: white;
+                                    font-size: 2rem;
+                                    margin-top: -2rem;`
+      check(modalInputs)
+      for(let i=0; i<modalInputs.length; i++) {
+        if(modalInputs[i].classList.contains('error')) {
+          return;
+        } 
+      }
+      formModal.appendChild(statusMessage);
+      statusMessage.textContent = loadMessage;
+      const formDataModal = new FormData(formModal);
+      let bodyModal = {};
+      formDataModal.forEach((val, key) => {
+        bodyModal[key] = val;
+      });
+      postData(bodyModal, () => {
+        statusMessage.textContent = succesMessage;
+        clear(modalInputs)
+        
+      }, (error) => {
+        statusMessage.textContent = errorMessage;
+        console.error(error);
+      });
+    });
+
+    formFooter.addEventListener('submit', (event) => {
+      event.preventDefault(); 
+      statusMessage.style.cssText = `color: white;
+                                    font-size: 2rem;
+                                    `
+      const footerInputs = document.querySelectorAll('.footer-form-input > .row > div > input') 
+      check(footerInputs)
+      for(let i=0; i<footerInputs.length; i++) {
+        if(footerInputs[i].classList.contains('error')) {
+          return;
+        } 
+      }
+      formFooter.appendChild(statusMessage);
+      statusMessage.textContent = loadMessage;
+      const formDataFooter = new FormData(formFooter);
+      let bodyFooter = {};
+      formDataFooter.forEach((val, key) => {
+        bodyFooter[key] = val;
+      });
+      postData(bodyFooter, () => {
+        statusMessage.textContent = succesMessage;
+        clear(footerHeroInputs);
+      }, (error) => {
+        statusMessage.textContent = errorMessage;
+        console.error(error);
+      });
+    });
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault(); 
+      let formHeroInputs = document.querySelectorAll('#form1 > .container >.row > div > input');
+      // // check(document.querySelectorAll('#form1 > .row > div > input'))
+      // if(check(formHeroInputs) === 'error') {
+      //   return;
+      // }
+      console.log(check(formHeroInputs))
+      for(let i=0; i<formHeroInputs.length; i++) {
+        if(formHeroInputs[i].classList.contains('error')) {
+          return;
+        } 
+      }
+
+      
+      
+      form.appendChild(statusMessage);
+      statusMessage.textContent = loadMessage;
+      const formData = new FormData(form);
+      let body = {};
+      formData.forEach((val, key) => {
+        body[key] = val;
+      });
+     
+      
+      postData(body, () => {
+        statusMessage.textContent = succesMessage;
+        clear(footerHeroInputs)
+      }, (error) => {
+        statusMessage.textContent = errorMessage;
+        console.error(error);
+      });
+     
+    });
+    const clear = (inputs) => {
+      inputs.forEach((item) => {
+        item.value = '';
+        item.removeAttribute('required');
+      });
+    };
+    const check = (inputs) => {
+      
+      inputs.forEach((item) => {
+        // item.style.border = 'solid 1px red';
+        item.classList.add('error');
+        if(!item.value.trim()){
+          // item.style.border = 'solid 1px red';
+          item.classList.add('error');
+        
+         
+        } 
+        else if(item.value.trim() !== ''){
+          item.classList.remove('error')
+         
+        } else {
+          // item.style.border = 'solid 1px red';
+          item.classList.add('error');
+          
+        }
+      });
+    };
+
+    const postData = (body, outputData, errorData) => {
+      const request = new XMLHttpRequest();
+      request.addEventListener('readystatechange', () => {
+        
+        if(request.readyState !== 4) {
+          return;
+        } 
+        if(request.status === 200) {
+          outputData();
+        } else {
+          errorData(request.status);
+        };
+      });
+
+      request.open('POST', './server.php');
+      request.setRequestHeader('Content-Type', 'application/json');
+      request.send(JSON.stringify(body));
+    };
+
+  };
+  sendForm();
 });
