@@ -495,14 +495,14 @@ window.addEventListener('DOMContentLoaded', function () {
         event.target.value = event.target.value.replace(patternWriting, '');
       }
       if(event.target.tagName.toLowerCase() === 'input' && event.target.type !== 'number') {
-        item.addEventListener('input', () => {
-          if(!item.value.trim()){         
+        // item.addEventListener('input', () => {
+          if(!event.target.value.trim()){         
             // item.style.border = 'solid 1px red';
-            item.classList.add('error');
+            event.target.classList.add('error');
           } else {
-            item.classList.remove('error')
+            event.target.classList.remove('error')
           };
-        });
+        // });
       }
     })
     modalInputs.forEach((item) => {
