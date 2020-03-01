@@ -548,11 +548,13 @@ window.addEventListener('DOMContentLoaded', function () {
                                     `
       const footerInputs = document.querySelectorAll('.footer-form-input > .row > div > input') 
       check(footerInputs)
+
       for(let i=0; i<footerInputs.length; i++) {
         if(footerInputs[i].classList.contains('error')) {
           return;
-        } 
-      }
+        }; 
+      };
+
       formFooter.appendChild(statusMessage);
       statusMessage.textContent = loadMessage;
       const formDataFooter = new FormData(formFooter);
@@ -632,22 +634,25 @@ window.addEventListener('DOMContentLoaded', function () {
     };
 
     const postData = (body, outputData, errorData) => {
-      const request = new XMLHttpRequest();
-      request.addEventListener('readystatechange', () => {
-        
-        if(request.readyState !== 4) {
-          return;
-        } 
-        if(request.status === 200) {
-          outputData();
-        } else {
-          errorData(request.status);
-        };
-      });
-
-      request.open('POST', './server.php');
-      request.setRequestHeader('Content-Type', 'application/json');
-      request.send(JSON.stringify(body));
+      return new Promise (() => {
+        const request = new XMLHttpRequest();
+        request.addEventListener('readystatechange', () => {
+          
+          if(request.readyState !== 4) {
+            return;
+          } 
+          if(request.status === 200) {
+            outputData();
+          } else {
+            errorData(request.status);
+          };
+        });
+  
+        request.open('POST', './server.php');
+        request.setRequestHeader('Content-Type', 'application/json');
+        request.send(JSON.stringify(body));
+      }) 
+     
     };
 
   };
