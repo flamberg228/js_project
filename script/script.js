@@ -531,14 +531,13 @@ window.addEventListener('DOMContentLoaded', function () {
       formDataModal.forEach((val, key) => {
         bodyModal[key] = val;
       });
-      postData(bodyModal, () => {
-        statusMessage.textContent = succesMessage;
-        clear(modalInputs)
-        
-      }, (error) => {
-        statusMessage.textContent = errorMessage;
-        console.error(error);
-      });
+      postData(bodyModal)
+              .then(() => {
+                statusMessage.textContent = 'Спасибо! Мы с вами скоро свяжемся!';
+              })
+              .catch(() => {
+                statusMessage.textContent = 'Что-то пошло не так...';
+              })
     });
 
     formFooter.addEventListener('submit', (event) => {
@@ -562,13 +561,13 @@ window.addEventListener('DOMContentLoaded', function () {
       formDataFooter.forEach((val, key) => {
         bodyFooter[key] = val;
       });
-      postData(bodyFooter, () => {
-        statusMessage.textContent = succesMessage;
-        clear(footerHeroInputs);
-      }, (error) => {
-        statusMessage.textContent = errorMessage;
-        console.error(error);
-      });
+      postData(bodyFooter)
+              .then(() => {
+                statusMessage.textContent = 'Спасибо! Мы с вами скоро свяжемся!';
+              })
+              .catch(() => {
+                statusMessage.textContent = 'Что-то пошло не так...';
+              })
     });
 
     form.addEventListener('submit', (event) => {
@@ -596,13 +595,13 @@ window.addEventListener('DOMContentLoaded', function () {
       });
      
       
-      postData(body, () => {
-        statusMessage.textContent = succesMessage;
-        clear(footerHeroInputs)
-      }, (error) => {
-        statusMessage.textContent = errorMessage;
-        console.error(error);
-      });
+      postData(body)
+              .then(() => {
+                statusMessage.textContent = 'Спасибо! Мы с вами скоро свяжемся!';
+              })
+              .catch(() => {
+                statusMessage.textContent = 'Что-то пошло не так...';
+              })
      
     });
     const clear = (inputs) => {
@@ -633,8 +632,8 @@ window.addEventListener('DOMContentLoaded', function () {
       });
     };
 
-    const postData = (body, outputData, errorData) => {
-      return new Promise (() => {
+    const postData = (body) => {
+      return new Promise ((resolve, reject) => {
         const request = new XMLHttpRequest();
         request.addEventListener('readystatechange', () => {
           
@@ -642,9 +641,9 @@ window.addEventListener('DOMContentLoaded', function () {
             return;
           } 
           if(request.status === 200) {
-            outputData();
+            resolve();
           } else {
-            errorData(request.status);
+            reject(request.statusText);
           };
         });
   
