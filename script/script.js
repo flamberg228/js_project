@@ -534,6 +534,7 @@ window.addEventListener('DOMContentLoaded', function () {
       postData(bodyModal)
               .then(() => {
                 statusMessage.textContent = 'Спасибо! Мы с вами скоро свяжемся!';
+                clear(modalInputs)
               })
               .catch(() => {
                 statusMessage.textContent = 'Что-то пошло не так...';
@@ -564,6 +565,7 @@ window.addEventListener('DOMContentLoaded', function () {
       postData(bodyFooter)
               .then(() => {
                 statusMessage.textContent = 'Спасибо! Мы с вами скоро свяжемся!';
+                clear(footerInputs);
               })
               .catch(() => {
                 statusMessage.textContent = 'Что-то пошло не так...';
@@ -598,6 +600,7 @@ window.addEventListener('DOMContentLoaded', function () {
       postData(body)
               .then(() => {
                 statusMessage.textContent = 'Спасибо! Мы с вами скоро свяжемся!';
+                clear(formHeroInputs);
               })
               .catch(() => {
                 statusMessage.textContent = 'Что-то пошло не так...';
