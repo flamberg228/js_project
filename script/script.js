@@ -532,11 +532,16 @@ window.addEventListener('DOMContentLoaded', function () {
         bodyModal[key] = val;
       });
       postData(bodyModal)
-              .then(() => {
+              .then((response) => {
+                if(response.status !== 200) {
+                  throw new Error('status network not 200');
+                }
+                console.log(response)
                 statusMessage.textContent = 'Спасибо! Мы с вами скоро свяжемся!';
               })
-              .catch(() => {
+              .catch((error) => {
                 statusMessage.textContent = 'Что-то пошло не так...';
+                console.error(error);
               })
     });
 
@@ -562,11 +567,16 @@ window.addEventListener('DOMContentLoaded', function () {
         bodyFooter[key] = val;
       });
       postData(bodyFooter)
-              .then(() => {
+              .then((response) => {
+                if(response.status !== 200) {
+                  throw new Error('status network not 200');
+                }
+                console.log(response)
                 statusMessage.textContent = 'Спасибо! Мы с вами скоро свяжемся!';
               })
-              .catch(() => {
+              .catch((error) => {
                 statusMessage.textContent = 'Что-то пошло не так...';
+                console.error(error);
               })
     });
 
@@ -587,20 +597,25 @@ window.addEventListener('DOMContentLoaded', function () {
       
       
       form.appendChild(statusMessage);
-      statusMessage.textContent = loadMessage;
+     
       const formData = new FormData(form);
       let body = {};
       formData.forEach((val, key) => {
         body[key] = val;
       });
-     
+      statusMessage.textContent = loadMessage;
       
       postData(body)
-              .then(() => {
+              .then((response) => {
+                if(response.status !== 200) {
+                  throw new Error('status network not 200');
+                }
+                console.log(response)
                 statusMessage.textContent = 'Спасибо! Мы с вами скоро свяжемся!';
               })
-              .catch(() => {
+              .catch((error) => {
                 statusMessage.textContent = 'Что-то пошло не так...';
+                console.error(error);
               })
      
     });
@@ -633,6 +648,14 @@ window.addEventListener('DOMContentLoaded', function () {
     };
 
     const postData = (body) => {
+      return fetch('./server.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(body),
+        credentials: 'include'
+      }) 
       return new Promise ((resolve, reject) => {
         const request = new XMLHttpRequest();
         request.addEventListener('readystatechange', () => {
