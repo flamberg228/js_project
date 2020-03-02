@@ -538,6 +538,7 @@ window.addEventListener('DOMContentLoaded', function () {
                 }
                 console.log(response)
                 statusMessage.textContent = 'Спасибо! Мы с вами скоро свяжемся!';
+                clear(modalInputs);
               })
               .catch((error) => {
                 statusMessage.textContent = 'Что-то пошло не так...';
@@ -573,6 +574,7 @@ window.addEventListener('DOMContentLoaded', function () {
                 }
                 console.log(response)
                 statusMessage.textContent = 'Спасибо! Мы с вами скоро свяжемся!';
+                clear(footerInputs);
               })
               .catch((error) => {
                 statusMessage.textContent = 'Что-то пошло не так...';
@@ -583,6 +585,9 @@ window.addEventListener('DOMContentLoaded', function () {
     form.addEventListener('submit', (event) => {
       event.preventDefault(); 
       let formHeroInputs = document.querySelectorAll('#form1 > .container >.row > div > input');
+      statusMessage.style.cssText = `color: white;
+      font-size: 2rem;
+      `
       // // check(document.querySelectorAll('#form1 > .row > div > input'))
       // if(check(formHeroInputs) === 'error') {
       //   return;
@@ -612,6 +617,7 @@ window.addEventListener('DOMContentLoaded', function () {
                 }
                 console.log(response)
                 statusMessage.textContent = 'Спасибо! Мы с вами скоро свяжемся!';
+                clear(formHeroInputs);
               })
               .catch((error) => {
                 statusMessage.textContent = 'Что-то пошло не так...';
@@ -648,7 +654,7 @@ window.addEventListener('DOMContentLoaded', function () {
     };
 
     const postData = (body) => {
-      return fetch('./server1.php', {
+      return fetch('./server.php', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
