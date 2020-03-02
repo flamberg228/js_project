@@ -648,7 +648,7 @@ window.addEventListener('DOMContentLoaded', function () {
     };
 
     const postData = (body) => {
-      return fetch('./server.php', {
+      return fetch('./server1.php', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
