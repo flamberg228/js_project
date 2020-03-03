@@ -24,31 +24,13 @@ const calc = (price = 100) => {
       dayValue *= 2;
     } else if(calcDay.value && calcDay.value < 10) {
       dayValue *= 1.5;
-      dayValue = Math.round(dayValue)
+      dayValue = Math.trunc(dayValue)
     }
     if(typeValue && squareValue) {
-      total = price * typeValue * squareValue * countValue * dayValue;
+      total = price * typeValue * squareValue * countValue * Math.trunc(dayValue);
       total = total;
     } 
-    
-    let interval;
-    let animation = () => {
-      
-      interval = requestAnimationFrame(animation);
-      
-      if(count < total) {
-        // if(total <= 2000) {
-          count = count + 30;
-          totalValue.textContent = count;
-      } else if(count > total) {
-        count = count -16;
-        totalValue.textContent = count;
-      } else {
-        cancelAnimationFrame(interval);
-      }
-    }
-    animation();
-
+    totalValue.textContent = total;
   }
 
   calcBlock.addEventListener('change', (event) => {
