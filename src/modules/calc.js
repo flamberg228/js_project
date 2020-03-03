@@ -15,7 +15,7 @@ const calc = (price = 100) => {
     const squareValue = +calcSquare.value;
    
     
-    console.log(count)
+    // console.log(count)
     if(calcCount.value > 1) {
       countValue += (+calcCount.value - 1)/ 10;
     }

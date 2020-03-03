@@ -21,7 +21,7 @@ const tabs = () => {
     if(target) {
       tab.forEach((item, i) => {
         if(item === target) {
-          console.log(tabContent[i]) 
+          // console.log(tabContent[i]) 
           toggleTabContent(i);
         };
       });

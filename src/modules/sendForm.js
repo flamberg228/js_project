@@ -61,7 +61,7 @@ const sendForm = () => {
               if(response.status !== 200) {
                 throw new Error('status network not 200');
               }
-              console.log(response)
+              // console.log(response)
               statusMessage.textContent = 'Спасибо! Мы с вами скоро свяжемся!';
               clear(modalInputs);
             })
@@ -97,7 +97,7 @@ const sendForm = () => {
               if(response.status !== 200) {
                 throw new Error('status network not 200');
               }
-              console.log(response)
+              // console.log(response)
               statusMessage.textContent = 'Спасибо! Мы с вами скоро свяжемся!';
               clear(footerInputs);
             })
@@ -117,7 +117,7 @@ const sendForm = () => {
     // if(check(formHeroInputs) === 'error') {
     //   return;
     // }
-    console.log(check(formHeroInputs))
+    check(formHeroInputs)
     for(let i=0; i<formHeroInputs.length; i++) {
       if(formHeroInputs[i].classList.contains('error')) {
         return;
@@ -140,7 +140,7 @@ const sendForm = () => {
               if(response.status !== 200) {
                 throw new Error('status network not 200');
               }
-              console.log(response)
+              // console.log(response)
               statusMessage.textContent = 'Спасибо! Мы с вами скоро свяжемся!';
               clear(formHeroInputs);
             })

@@ -18,7 +18,7 @@ const getScrolling = () => {
     item.addEventListener('click', (event) => {
       event.preventDefault();
       const anchor = item.getAttribute('href').substr(1)
-      console.log(anchor)
+      // console.log(anchor)
       document.getElementById(anchor).scrollIntoView({
         behavior: 'smooth',
         block: 'start'

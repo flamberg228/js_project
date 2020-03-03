@@ -8,7 +8,6 @@ const addDots = () => {
     if(i === 0) {
       elem.classList.add('dot-active');
     }
-    console.log(elem)
     portDots.appendChild(elem);
   }
 };
